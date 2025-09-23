@@ -1,9 +1,10 @@
-name: Build and Push Docker Image
+name: Build and Push DevDuck Labspace
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -13,7 +14,6 @@ jobs:
         uses: actions/checkout@v4
 
       # Ensure Compose v2.39.3+ is available (includes bug fixes for publishing)
-      # Can remove this action once default runners include it
       - name: Set up Docker Compose
         uses: docker/setup-compose-action@v1
         with:
@@ -25,8 +25,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Publish Compose file
+      - name: Publish Compose project
         run: |
-          docker compose -f oci://dockersamples/labspace -f .labspace/compose.override.yaml publish ajeetraina777/devduck-labspace --with-env -y
+          docker compose -f oci://dockersamples/labspace-content-dev -f .labspace/compose.override.yaml publish ajeetraina777/devduck-labspace --with-env -y
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
+      - name: 🎉 Success
+        run: |
+          echo "✅ DevDuck Labspace published successfully!"
+          echo "🚀 Run with: docker compose -f oci://ajeetraina777/devduck-labspace up"
+          echo "🌐 Then visit: http://localhost:3030"

@@ -1,16 +1,6 @@
 title: Docker DevDuck Multi-Agent Workshop
 description: |
-  Master the art of building multi-agent AI systems with Docker and Cerebras AI! 
-  
-  This comprehensive hands-on workshop guides you through creating intelligent development assistance systems using containerized environments. You'll learn to orchestrate multiple AI agents, integrate cloud-based AI services, and build production-ready multi-agent architectures.
-
-  🎯 What You'll Build:
-  • Multi-agent system with specialized AI agents
-  • Docker-based microservices architecture  
-  • Cerebras AI integration for advanced analysis
-  • Real-world development assistance scenarios
-
-  🛠️ Technologies: Docker, Python, FastAPI, Node.js, Cerebras AI, Redis, PostgreSQL
+  Let's build a multi-agent AI systems with Docker and Cerebras AI! 
 
 sections:
   - title: Introduction to DevDuck

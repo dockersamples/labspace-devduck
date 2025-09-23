@@ -237,7 +237,6 @@ DEBUG_MODE=false
 The system uses Docker Compose for orchestration:
 
 ```yaml
-version: '3.8'
 services:
   devduck-agent:
     build: ./agents

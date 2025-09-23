@@ -29,6 +29,7 @@ jobs:
         run: |
           docker compose -f oci://dockersamples/labspace-content-dev -f .labspace/compose.override.yaml publish ajeetraina777/devduck-labspace --with-env -y
         env:
+          CONTENT_PATH: ${{ github.workspace }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 
       - name: 🎉 Success

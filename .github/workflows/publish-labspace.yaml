@@ -1,220 +1,32 @@
-name: Build and Push DevDuck Workshop
-
-env:
-  REGISTRY: docker.io
-  IMAGE_NAME: ajeetraina777/devduck-labspace
+name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+      # Ensure Compose v2.39.3+ is available (includes bug fixes for publishing)
+      # Can remove this action once default runners include it
+      - name: Set up Docker Compose
+        uses: docker/setup-compose-action@v1
+        with:
+          version: v2.39.3
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Create Dockerfile
-      run: |
-        cat > Dockerfile << 'EOF'
-        # Use the official nginx image as base
-        FROM nginx:alpine
-
-        # Copy all labspace content to the web directory
-        COPY labspace.yaml /usr/share/nginx/html/
-        COPY .labspace/ /usr/share/nginx/html/.labspace/
-        COPY README.md /usr/share/nginx/html/
-
-        # Create an attractive index page
-        RUN cat > /usr/share/nginx/html/index.html << 'HTMLEOF'
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>🦆 Docker DevDuck Multi-Agent Workshop</title>
-            <style>
-                * { margin: 0; padding: 0; box-sizing: border-box; }
-                body { 
-                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                    line-height: 1.6; 
-                    color: #333; 
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    min-height: 100vh;
-                }
-                .container { 
-                    max-width: 900px; 
-                    margin: 0 auto; 
-                    padding: 40px 20px; 
-                }
-                .header { 
-                    background: rgba(255,255,255,0.95); 
-                    padding: 40px; 
-                    border-radius: 20px; 
-                    text-align: center; 
-                    margin-bottom: 40px;
-                    backdrop-filter: blur(10px);
-                    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-                }
-                .header h1 { 
-                    font-size: 2.5rem; 
-                    color: #2c3e50; 
-                    margin-bottom: 20px; 
-                }
-                .header p { 
-                    font-size: 1.2rem; 
-                    color: #7f8c8d; 
-                    margin-bottom: 30px; 
-                }
-                .quick-start {
-                    background: #2c3e50;
-                    color: white;
-                    padding: 20px;
-                    border-radius: 12px;
-                    margin: 30px 0;
-                }
-                .quick-start h3 { margin-bottom: 15px; }
-                .command {
-                    background: #34495e;
-                    padding: 15px;
-                    border-radius: 8px;
-                    font-family: 'Courier New', monospace;
-                    margin: 10px 0;
-                    overflow-x: auto;
-                }
-                .sections-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                    gap: 20px;
-                    margin-top: 30px;
-                }
-                .section-card {
-                    background: rgba(255,255,255,0.9);
-                    padding: 25px;
-                    border-radius: 15px;
-                    transition: transform 0.3s, box-shadow 0.3s;
-                    border-left: 5px solid #3498db;
-                }
-                .section-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-                }
-                .section-card h3 {
-                    color: #2c3e50;
-                    margin-bottom: 10px;
-                    font-size: 1.1rem;
-                }
-                .section-card a {
-                    color: #3498db;
-                    text-decoration: none;
-                    font-weight: 500;
-                }
-                .section-card a:hover { text-decoration: underline; }
-                .footer {
-                    text-align: center;
-                    margin-top: 60px;
-                    color: rgba(255,255,255,0.8);
-                }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>🦆 Docker DevDuck Multi-Agent Workshop</h1>
-                    <p>Master the art of building multi-agent AI systems with Docker and Cerebras AI!</p>
-                    
-                    <div class="quick-start">
-                        <h3>🚀 Quick Start</h3>
-                        <p>Run this workshop instantly:</p>
-                        <div class="command">docker run -p 3030:3030 ajeetraina777/devduck-labspace</div>
-                        <p>Then visit: <strong>http://localhost:3030</strong></p>
-                    </div>
-                </div>
-
-                <div class="sections-grid">
-                    <div class="section-card">
-                        <h3>🎯 <a href=".labspace/01-introduction.md">Introduction to DevDuck</a></h3>
-                        <p>Get started with multi-agent AI systems and understand the DevDuck architecture.</p>
-                    </div>
-                    <div class="section-card">
-                        <h3>⚙️ <a href=".labspace/02-prerequisites.md">Prerequisites & Setup</a></h3>
-                        <p>Install and configure the tools you'll need for the workshop.</p>
-                    </div>
-                    <div class="section-card">
-                        <h3>🏁 <a href=".labspace/03-getting-started.md">Getting Started</a></h3>
-                        <p>Clone the repository and set up your development environment.</p>
-                    </div>
-                    <div class="section-card">
-                        <h3>🐳 <a href=".labspace/04-environment-setup.md">Environment Setup</a></h3>
-                        <p>Configure Docker containers and multi-agent orchestration.</p>
-                    </div>
-                    <div class="section-card">
-                        <h3>🤝 <a href=".labspace/05-basic-interaction.md">Basic Agent Interaction</a></h3>
-                        <p>Learn how agents communicate and coordinate tasks.</p>
-                    </div>
-                    <div class="section-card">
-                        <h3>🔧 <a href=".labspace/06-local-agent.md">Local Agent Development</a></h3>
-                        <p>Build and deploy your first local processing agent.</p>
-                    </div>
-                    <div class="section-card">
-                        <h3>🧠 <a href=".labspace/07-cerebras-analysis.md">Cerebras AI Analysis</a></h3>
-                        <p>Integrate cloud-based AI services for advanced processing.</p>
-                    </div>
-                    <div class="section-card">
-                        <h3>🚀 <a href=".labspace/08-next-steps.md">Next Steps & Deployment</a></h3>
-                        <p>Deploy your multi-agent system to production.</p>
-                    </div>
-                </div>
-
-                <div class="footer">
-                    <p>📚 <a href="https://github.com/ajeetraina/devduck-labspace" style="color: rgba(255,255,255,0.9);">View Source on GitHub</a></p>
-                    <p>Created with ❤️ by Ajeet Singh Raina</p>
-                </div>
-            </div>
-        </body>
-        </html>
-        HTMLEOF
-
-        # Configure nginx to serve on port 3030
-        RUN sed -i 's/listen       80;/listen       3030;/' /etc/nginx/conf.d/default.conf
-        RUN sed -i 's/listen  \[::\]:80;/listen  [::]:3030;/' /etc/nginx/conf.d/default.conf
-
-        EXPOSE 3030
-        EOF
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        platforms: linux/amd64,linux/arm64
-        push: true
-        tags: |
-          ${{ env.IMAGE_NAME }}:latest
-          ${{ env.IMAGE_NAME }}:v1.0.0
-        labels: |
-          org.opencontainers.image.title=DevDuck Multi-Agent Workshop
-          org.opencontainers.image.description=Learn to build multi-agent AI systems with Docker and Cerebras AI
-          org.opencontainers.image.url=https://github.com/ajeetraina/devduck-labspace
-          org.opencontainers.image.source=https://github.com/ajeetraina/devduck-labspace
-
-    - name: 🎉 Success
-      run: |
-        echo "✅ DevDuck Labspace published successfully!"
-        echo "🐳 Docker Hub: https://hub.docker.com/r/ajeetraina777/devduck-labspace"
-        echo "🚀 Run with: docker run -p 3030:3030 ajeetraina777/devduck-labspace"
-        echo "🌐 Then visit: http://localhost:3030"
+      - name: Publish Compose file
+        run: |
+          docker compose -f oci://dockersamples/labspace -f .labspace/compose.override.yaml publish ajeetraina777/devduck-labspace --with-env -y
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}

@@ -1,11 +1,31 @@
-title: Labspace starter
+title: Docker DevDuck Multi-Agent Workshop
 description: |
-  A basic template for creating a Labspace, including all of the boilerplate needed to write and publish a Labspace.
+  Master the art of building multi-agent AI systems with Docker and Cerebras AI! 
+  
+  This comprehensive hands-on workshop guides you through creating intelligent development assistance systems using containerized environments. You'll learn to orchestrate multiple AI agents, integrate cloud-based AI services, and build production-ready multi-agent architectures.
+
+  🎯 What You'll Build:
+  • Multi-agent system with specialized AI agents
+  • Docker-based microservices architecture  
+  • Cerebras AI integration for advanced analysis
+  • Real-world development assistance scenarios
+
+  🛠️ Technologies: Docker, Python, FastAPI, Node.js, Cerebras AI, Redis, PostgreSQL
 
 sections:
-  - title: Introduction
+  - title: Introduction to DevDuck
     contentPath: .labspace/01-introduction.md
-  - title: Main Content 1
-    contentPath: .labspace/02-main-content.md
-  - title: Conclusion
-    contentPath: .labspace/03-conclusion.md
+  - title: Prerequisites & Setup
+    contentPath: .labspace/02-prerequisites.md
+  - title: Getting Started
+    contentPath: .labspace/03-getting-started.md
+  - title: Environment Setup
+    contentPath: .labspace/04-environment-setup.md
+  - title: Basic Agent Interaction
+    contentPath: .labspace/05-basic-interaction.md
+  - title: Local Agent Development
+    contentPath: .labspace/06-local-agent.md
+  - title: Cerebras AI Analysis
+    contentPath: .labspace/07-cerebras-analysis.md
+  - title: Next Steps & Deployment
+    contentPath: .labspace/08-next-steps.md

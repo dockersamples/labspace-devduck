@@ -1,3 +1,6 @@
+name: Build and Push Labspace
+
+
 on:
   push:
     branches:

@@ -1,4 +1,4 @@
-name: Package and deploy Labspace
+name: Package and deploy DevDuck Labspace
 
 env:
   DOCKERHUB_REPO: ajeetraina777/devduck-labspace
@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch: # Allow manual triggering
 
 jobs:
   build-and-push:
@@ -16,11 +17,16 @@ jobs:
         uses: actions/checkout@v4
 
       # Ensure Compose v2.39.3+ is available (includes bug fixes for publishing)
-      # Can remove this action once default runners include it
       - name: Set up Docker Compose
         uses: docker/setup-compose-action@v1
         with:
           version: v2.39.3
+
+      - name: Enable Docker experimental features
+        run: |
+          echo '{"experimental": true}' | sudo tee /etc/docker/daemon.json
+          sudo systemctl restart docker
+          echo "COMPOSE_EXPERIMENTAL_OCI_REMOTE=true" >> $GITHUB_ENV
 
       - name: Log in to DockerHub
         uses: docker/login-action@v3
@@ -28,8 +34,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Publish Compose file
+      - name: Verify Docker login and repo access
         run: |
-          docker compose -f oci://dockersamples/labspace -f .labspace/compose.override.yaml publish ${DOCKERHUB_REPO} --with-env -y
+          echo "Logged in as: ${{ secrets.DOCKERHUB_USERNAME }}"
+          echo "Target repository: ${DOCKERHUB_REPO}"
+
+      - name: Publish DevDuck Labspace
+        run: |
+          # Use the correct development base image
+          docker compose -f oci://dockersamples/labspace-content-dev -f .labspace/compose.override.yaml publish ${DOCKERHUB_REPO} --with-env -y
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          COMPOSE_EXPERIMENTAL_OCI_REMOTE: "true"

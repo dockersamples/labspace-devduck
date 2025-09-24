@@ -6,14 +6,14 @@ Before diving into the hands-on exercises, let's ensure your environment is prop
 
 ### Hardware Requirements
 
-| Component | Minimum | Recommended |
-|-----------|---------|-------------|
-| **RAM** | 8 GB | 16 GB+ |
-| **Storage** | 10 GB free | 20 GB+ free |
-| **CPU** | 4 cores | 8+ cores |
-| **Network** | Stable internet | High-speed broadband |
+ | Component | Minimum | Recommended |
+ |-----------|---------|-------------|
+ | **RAM** | 8 GB | 16 GB+ |
+ | **Storage** | 10 GB free | 20 GB+ free |
+ | **CPU** | 4 cores | 8+ cores |
+ | **Network** | Stable internet | High-speed broadband |
 
-!!! warning "Resource Usage"
+ !!! warning "Resource Usage"
     AI models can be memory-intensive. The local agent will download and cache models, which requires significant disk space and RAM.
 
 ### Software Prerequisites

@@ -26,12 +26,7 @@ ls -la
 
 Take a moment to understand the project layout:
 
-```bash
-# View the directory tree
-tree . -I '__pycache__|*.pyc|.git'
-```
 
-**Expected Structure:**
 ```
 .
 ├── LICENSE.md                 # Project license

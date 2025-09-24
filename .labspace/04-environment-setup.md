@@ -178,7 +178,6 @@ Let's examine and enhance your `compose.yml`:
 
 ```yaml
 # Enhanced Docker Compose configuration
-version: '3.8'
 
 networks:
   devduck-network:

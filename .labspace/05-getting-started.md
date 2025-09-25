@@ -6,8 +6,7 @@ DevDuck is a multi-agent system for Node.js programming assistance built with Go
 
 ## Architecture
 
-The system consists of three main agents orchestrated by Docker Compose, which plays a
-**primordial role** in launching and coordinating all agent services:
+The system consists of three main agents orchestrated by Docker Compose, which plays a **primordial role** in launching and coordinating all agent services:
 
 ### 🐙 Docker Compose Orchestration
 
@@ -344,7 +343,6 @@ curl -s http://localhost:8000/health | jq .
 ```
 
 
-
 ## Step 4: First Access
 
 ### 🌐 Access the Web Interface
@@ -416,5 +414,3 @@ If everything is working correctly, you should see:
 Excellent! You now have a fully functional multi-agent system running. In the next section, you'll dive deeper into environment configuration and learn how to customize your deployment for different scenarios.
 
 Ready to explore the environment setup and deployment options? Let's continue! 🚀
-
-

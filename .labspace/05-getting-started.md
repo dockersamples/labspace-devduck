@@ -210,17 +210,9 @@ You'll need to configure these environment variables:
 
 ```bash
 # Cerebras Configuration
-CEREBRAS_API_KEY=<your_cerebras_api_key>
+CEREBRAS_API_KEY=your_cerebras_api_key
 CEREBRAS_BASE_URL=https://api.cerebras.ai/v1
 CEREBRAS_CHAT_MODEL=llama-4-scout-17b-16e-instruct
-
-# Local Agent Configuration  
-LOCAL_MODEL_NAME=microsoft/DialoGPT-medium
-LOCAL_MODEL_CACHE=/tmp/models
-
-# System Configuration
-LOG_LEVEL=INFO
-DEBUG_MODE=false
 ```
 
 ### Docker Compose Structure
@@ -407,60 +399,7 @@ print(f'Response: {response.json()}')
 - [ ] All containers remain running
 - [ ] Network connectivity is working
 
-## Troubleshooting Common Issues
 
-### ⚠️ Port Conflicts
-
-**Problem**: Port 8000 is already in use
-```bash
-# Find what's using the port
-lsof -i :8000
-
-# Modify the port in compose.yml if needed
-# Change "8000:8000" to "8001:8000"
-```
-
-### 🤖 Model Loading Issues
-
-**Problem**: Local models fail to load or are too large
-```bash
-# Check available disk space
-df -h
-
-# Monitor memory usage during startup
-docker stats
-```
-
-**Solution**: Use lightweight models for testing:
-```bash
-# Edit your .env file
-LOCAL_MODEL_NAME=microsoft/DialoGPT-small
-```
-
-### 🔑 API Authentication Issues
-
-**Problem**: Cerebras API returns authentication errors
-```bash
-# Verify your API key
-echo $CEREBRAS_API_KEY
-
-# Test API connectivity
-curl -H "Authorization: Bearer $CEREBRAS_API_KEY" \
-     -H "Content-Type: application/json" \
-     -d '{"model":"llama3.1-8b","messages":[{"role":"user","content":"hello"}]}' \
-     https://api.cerebras.ai/v1/chat/completions
-```
-
-### 📡 Network Issues
-
-**Problem**: Containers can't communicate
-```bash
-# Check Docker networks
-docker network ls
-
-# Inspect the application network
-docker network inspect docker-cerebras-demo_default
-```
 
 ## Success Confirmation
 

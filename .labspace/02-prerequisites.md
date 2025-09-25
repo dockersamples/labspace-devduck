@@ -19,7 +19,7 @@ Before diving into the hands-on exercises, let's ensure your environment is prop
 
 #### ✅ Required Software
 
-1. **Docker Desktop** (Latest version)
+1. **Docker Desktop** (Latest version - 4.46.0)
    - Windows: Docker Desktop for Windows
    - macOS: Docker Desktop for Mac  
    - Linux: Docker Engine + Docker Compose
@@ -27,6 +27,7 @@ Before diving into the hands-on exercises, let's ensure your environment is prop
 2. **Git** (for cloning repositories)
 
 3. **Web Browser** (Chrome, Firefox, Safari, Edge)
+
 
 
 #### 🔧 Verification Commands
@@ -47,10 +48,21 @@ docker ps
 docker system info
 ```
 
-**Expected Output Example:**
+### Enable Docker Model Runner
+
+Open Docker Desktop Settings > AI > “Docker Model Runner” is enabled.
+
+Alternatively, you can use CLI:
+
 ```
-Docker version 24.0.0, build 1234567
-Docker Compose version v2.20.0
+docker desktop enable model-runner
+```
+
+#### Download a model
+
+```
+docker model pull ai/llama3.2:1B-Q8_0
+docker model pull ai/mistral:7B-Q4_0
 ```
 
 ### API Requirements
@@ -61,8 +73,8 @@ Docker Compose version v2.20.0
 2. **Get API Key**: Navigate to API section and generate a key
 3. **Verify Access**: Test API connectivity (we'll do this together)
 
-!!! tip "Free Tier Available"
-    Cerebras offers a generous free tier for testing and learning. You won't need to provide payment information for this workshop.
+
+Note: Cerebras offers a generous free tier for testing and learning. You won't need to provide payment information for this workshop.
 
 ## System Architecture Overview
 
@@ -261,22 +273,9 @@ Before proceeding to the next section, ensure you have:
 - [ ] Basic understanding of Docker concepts
 - [ ] Terminal/command prompt access
 
-## Troubleshooting Common Setup Issues
-
-### Docker Issues
-- **Problem**: "Docker daemon not running"
-- **Solution**: Start Docker Desktop and wait for it to fully initialize
-
-### Memory Issues  
-- **Problem**: System running slow or containers crashing
-- **Solution**: Increase Docker Desktop memory allocation to 8GB+
-
-### API Issues
-- **Problem**: Cannot access Cerebras API
-- **Solution**: Verify API key and internet connectivity
 
 ## Next Steps
 
-Great! Now that you understand the system architecture and have verified your prerequisites, you're ready to start building. In the next section, you'll clone the repository and begin the deployment process.
+Great! Now that you have verified your prerequisites, you're ready to start building. In the next section, you'll clone the repository and begin the deployment process.
 
 The exciting hands-on work begins now! 🚀

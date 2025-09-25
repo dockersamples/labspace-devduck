@@ -13,13 +13,11 @@ sections:
     contentPath: .labspace/04-docker-mcp-gateway.md
   - title: Getting Started with DevDuck Multi-Agent System
     contentPath: .labspace/05-getting-started-with-devduck.md
-  - title: Environment Setup
-    contentPath: .labspace/06-environment-setup.md
   - title: Basic Agent Interaction
-    contentPath: .labspace/07-basic-interaction.md
+    contentPath: .labspace/06-basic-interaction.md
   - title: Local Agent Development
-    contentPath: .labspace/08-local-agent.md
+    contentPath: .labspace/07-local-agent.md
   - title: Cerebras AI Analysis
-    contentPath: .labspace/09-cerebras-analysis.md
+    contentPath: .labspace/08-cerebras-analysis.md
   - title: Next Steps & Deployment
-    contentPath: .labspace/10-next-steps.md
+    contentPath: .labspace/09-next-steps.md

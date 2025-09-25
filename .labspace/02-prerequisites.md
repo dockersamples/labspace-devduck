@@ -2,19 +2,6 @@
 
 Before diving into the hands-on exercises, let's ensure your environment is properly set up and understand the system architecture we'll be working with.
 
-## System Requirements
-
-### Hardware Requirements
-
- | Component | Minimum | Recommended |
- |-----------|---------|-------------|
- | **RAM** | 8 GB | 16 GB+ |
- | **Storage** | 10 GB free | 20 GB+ free |
- | **CPU** | 4 cores | 8+ cores |
- | **Network** | Stable internet | High-speed broadband |
-
-
-
 ### Software Prerequisites
 
 #### ✅ Required Software
@@ -54,13 +41,13 @@ Open Docker Desktop Settings > AI > “Docker Model Runner” is enabled.
 
 Alternatively, you can use CLI:
 
-```
+```bash
 docker desktop enable model-runner
 ```
 
 #### Download AI models
 
-```
+```bash
 docker model pull ai/llama3.2:1B-Q8_0
 docker model pull ai/mistral:7B-Q4_0
 ```

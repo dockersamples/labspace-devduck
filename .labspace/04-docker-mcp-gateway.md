@@ -30,21 +30,19 @@ git clone https://github.com/docker/mcp-gateway
 cd mcp-gateway/examples/client
 ```
 
-### Key Files:
+You'll find two key files:
 
-1. Client Code (main.py):
+- Client Code (main.py):
+   - Connects to the MCP Gateway via HTTP streaming
+   - Calls a `search` tool with query `Docker`
+   - The gateway routes this to the appropriate MCP server
 
-- Connects to the MCP Gateway via HTTP streaming
-- Calls a `search` tool with query `Docker`
-- The gateway routes this to the appropriate MCP server
+- Docker Compose:
+  - Client Service: Your Python application connecting to the gateway
+  - Gateway Service: The MCP Gateway that manages MCP servers
+  - Gateway is configured with `--servers=duckduckgo` (a search MCP server)
 
-2. Docker Compose:
-
-- Client Service: Your Python application connecting to the gateway
-- Gateway Service: The MCP Gateway that manages MCP servers
-- Gateway is configured with `--servers=duckduckgo` (a search MCP server)
-
-### Running the app
+### Run the application containers
 
 ```bash
 docker compose up --build
@@ -52,12 +50,11 @@ docker compose up --build
 
 ### How it works?
 
-1. **Client Request**: Your Python client calls session.call_tool("search", {"query": "Docker"})
-2. **Gateway Routing**: The MCP Gateway receives the HTTP request and routes it to the DuckDuckGo MCP server
-3. **Server Execution**: The DuckDuckGo server performs the search via its API
-4. **Response Chain**: Results flow back through the server → gateway → client
-5. **Client Output**: Your client prints result.content[0].text
-
+1. Your Python client calls session.call_tool("search", {"query": "Docker"})
+2. The MCP Gateway receives the HTTP request and routes it to the DuckDuckGo MCP server
+3. The DuckDuckGo server performs the search via its API
+4. Results flow back through the server → gateway → client
+5. Your client prints result.content[0].text
 
 This example shows how to call the MCP Gateway from a python client:
 

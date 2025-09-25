@@ -1,36 +1,8 @@
 # Introduction
 
-👋 Welcome to the Docker DevDuck Multi-Agent Workshop! 
+👋 Welcome to the Docker DevDuck Multi-Agent Workshop!
 During this workshop, you'll learn how to build and deploy a multi-agent system using Docker, Google Agent Development Kit (ADK), and Cerebras AI.
 
-
-## What are Multi-Agent Systems?
-
-Multi-Agent Systems (MAS) are networks of autonomous agents that work together to solve complex problems that would be difficult or impossible for a single agent to handle alone. Each agent is specialized for specific tasks and can communicate with other agents to coordinate their efforts.
-
-
-### Key Characteristics
-
-- **Autonomy**: Each agent operates independently
-- **Social Ability**: Agents communicate and collaborate
-- **Reactivity**: Agents respond to environmental changes
-- **Pro-activeness**: Agents take initiative to achieve goals
-
-## Why Docker for Multi-Agent Systems?
-
-Docker provides the perfect platform for multi-agent systems because it offers:
-
-### 🚢 **Containerization Benefits**
-- **Isolation**: Each agent runs in its own secure environment
-- **Scalability**: Easy to scale individual agents based on demand
-- **Consistency**: Same behavior across development, testing, and production
-- **Resource Management**: Efficient resource allocation per agent
-
-### 🎼 **Orchestration with Docker Compose**
-- **Service Discovery**: Agents can easily find and communicate with each other
-- **Network Management**: Secure inter-agent communication
-- **Configuration Management**: Environment-specific settings
-- **Dependency Management**: Proper startup order and health checks
 
 ## The DevDuck System Architecture
 
@@ -84,25 +56,6 @@ By the end of this workshop, you'll be able to:
 - ✅ **Debug and troubleshoot** common multi-agent system issues
 - ✅ **Apply best practices** for containerized AI applications
 
-## What Makes This Workshop Special?
-
-### 🎯 **Practical Focus**
-Every concept is demonstrated with working code and real deployments.
-
-### 🧪 **Hands-On Labs** 
-Interactive exercises that build upon each other progressively.
-
-### 🔄 **Real-World Scenarios**
-Based on actual developer workflow automation needs.
-
-### 🏗️ **Production-Ready Patterns**
-Learn deployment strategies that work in real environments.
-
-## Workshop Duration
-
-- **Total Time**: 2-3 hours
-- **Skill Level**: Intermediate (basic Docker and Python knowledge required)
-- **Format**: Self-paced with guided exercises
 
 ## Technology Stack
 
@@ -123,14 +76,9 @@ Before proceeding to the next section, ensure you have:
 - [ ] Text editor or IDE for viewing code
 - [ ] Internet connection for downloading models and accessing APIs
 
-!!! tip "Pro Tip"
-    Keep Docker Desktop running throughout the workshop as you'll be frequently starting and stopping containers.
 
 ## Next Steps
 
 Ready to dive in? The next section covers the prerequisites and system requirements needed to get started. You'll also get a detailed overview of the system architecture and how all the components work together.
 
 Let's build something amazing! 🚀
-
-
-

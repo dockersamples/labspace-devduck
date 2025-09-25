@@ -11,7 +11,7 @@ sections:
     contentPath: .labspace/03-docker-dmr-compose.md
   - title: Using MCP Gateway with Compose
     contentPath: .labspace/04-docker-mcp-gateway.md
-  - title: Getting Started
+  - title: Getting Started with DevDuck Multi-Agent System
     contentPath: .labspace/05-getting-started.md
   - title: Environment Setup
     contentPath: .labspace/06-environment-setup.md

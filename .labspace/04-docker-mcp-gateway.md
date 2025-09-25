@@ -12,6 +12,7 @@ The Docker MCP Gateway is a CLI tool and gateway service that implements the Mod
 - Built-in logging and call tracing capabilities
 - Run in isolated Docker containers with restricted privileges, network access, and resource usage
 
+<img width="1000" height="341" alt="image" src="https://github.com/user-attachments/assets/59ccb984-c868-46d5-9e21-7324746d5dbe" />
 
 
 

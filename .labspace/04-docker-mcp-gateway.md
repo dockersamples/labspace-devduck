@@ -6,39 +6,39 @@ The Docker MCP Gateway is a CLI tool and gateway service that implements the Mod
 
 ```mermaid
 graph TB
-   subgraph "AI Clients"
-         A1[Claude Desktop]
-         A2[VS Code]
-         A3[Cursor]
-         A4[Custom Python Client]
+  subgraph "AI Clients"
+        A1[Claude Desktop]
+        A2[VS Code]
+        A3[Cursor]
+        A4[Custom Python Client]
     end
     
     subgraph "Docker MCP Gateway"
-          G[MCP Gateway<br/>:9011]
-          GM[Gateway Manager]
-          GR[Request Router]
-          GA[Auth Handler]
-          GS[Secrets Manager]
+        G[MCP Gateway<br/>:9011]
+        GM[Gateway Manager]
+        GR[Request Router]
+        GA[Auth Handler]
+        GS[Secrets Manager]
     end
     
     subgraph "MCP Servers (Docker Containers)"
-          S1[DuckDuckGo Server<br/>Search Tools]
-          S2[GitHub Server<br/>Repository Tools]
-          S3[PostgreSQL Server<br/>Database Tools]
-          S4[Slack Server<br/>Communication Tools]
+        S1[DuckDuckGo Server<br/>Search Tools]
+        S2[GitHub Server<br/>Repository Tools]
+        S3[PostgreSQL Server<br/>Database Tools]
+        S4[Slack Server<br/>Communication Tools]
     end
     
     subgraph "External Services"
-          E1[DuckDuckGo API]
-          E2[GitHub API]
-          E3[PostgreSQL DB]
-          E4[Slack API]
+        E1[DuckDuckGo API]
+        E2[GitHub API]
+        E3[PostgreSQL DB]
+        E4[Slack API]
     end
     
     subgraph "Configuration"
-          C1[docker-mcp.yaml<br/>Server Catalog]
-          C2[registry.yaml<br/>Enabled Servers]
-          C3[config.yaml<br/>Gateway Config]
+        C1[docker-mcp.yaml<br/>Server Catalog]
+        C2[registry.yaml<br/>Enabled Servers]
+        C3[config.yaml<br/>Gateway Config]
     end
     
     %% Client connections
@@ -79,8 +79,8 @@ graph TB
     GM -->|Container Management| DS
     DS --> D
     
-    %% Example flow annotation
-    A4 -.->|1. call_tool("search", {"query": "Docker"})| G
+    %% Example flow annotation - Fixed quotes
+    A4 -.->|1. call_tool search with query Docker| G
     G -.->|2. Route to DuckDuckGo server| S1
     S1 -.->|3. Search via API| E1
     E1 -.->|4. Return results| S1

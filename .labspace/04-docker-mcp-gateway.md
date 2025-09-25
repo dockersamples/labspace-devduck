@@ -1,7 +1,7 @@
-## Demonstrating the Docker MCP Gateway with Docker Compose
+## Using the Docker MCP Gateway with Docker Compose
 
 
-The Docker MCP Gateway is a CLI tool and gateway service that implements the Model Context Protocol (MCP) - an open standard that allows AI applications to securely connect to external data sources and tools. It essentially acts as a universal translator and proxy between AI applications and the various tools/services they need to access, making it much easier to build AI-powered applications with rich external integrations.
+The [Docker MCP Gateway](https://docs.docker.com/ai/mcp-gateway/) is a CLI tool and gateway service that implements the Model Context Protocol (MCP) - an open standard that allows AI applications to securely connect to external data sources and tools. It essentially acts as a universal translator and proxy between AI applications and the various tools/services they need to access, making it much easier to build AI-powered applications with rich external integrations.
 
 ### Features
 

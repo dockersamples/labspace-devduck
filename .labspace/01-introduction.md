@@ -4,6 +4,7 @@
 During this workshop, you'll learn how to build and deploy a multi-agent system using Docker, Google Agent Development Kit (ADK), and Cerebras AI.
 
 
+
 ## The DevDuck System Architecture
 
 In this workshop, you'll build a system called "DevDuck" - a developer assistance platform that uses multiple specialized agents:
@@ -18,12 +19,14 @@ graph TD
     B --> G[MCP Gateway]
 ```
 
+
 ### Agent Roles
 
 1. **DevDuck Orchestrator**: The main coordinator that routes requests to appropriate agents
 2. **Local Agent**: Handles quick processing tasks using local models
 3. **Cerebras Agent**: Leverages powerful cloud-based AI for complex analysis
 4. **MCP Gateway**: Manages Model Context Protocol for enhanced capabilities
+
 
 ## Real-World Applications
 

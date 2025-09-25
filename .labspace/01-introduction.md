@@ -74,6 +74,45 @@ graph TD
 The architecture's brilliance lies in its security-by-design approach: while Context7 can access the internet to fetch documentation, the sandbox containers are completely network-isolated, preventing any potential data exfiltration or malicious activity from generated code. This creates a perfect balance where AI agents can access up-to-date knowledge to write better code, while ensuring that code execution happens in a bulletproof secure environment - essentially giving you the benefits of current documentation and safe execution simultaneously.
 
 
+## 
+
+```mermaid
+sequenceDiagram
+    participant U as 👤 User
+    participant A as 🧠 Agent
+    participant G as 🛡️ MCP Gateway
+    participant C as 📚 Context7
+    participant S as 🔧 Sandbox
+    participant W as 🌐 Web Docs
+    participant D as 🐳 Docker
+    
+    U->>A: "Create a modern React component"
+    
+    Note over A: Agent decides to get current docs first
+    A->>G: Request documentation tool
+    G->>C: Route to Context7 server
+    C->>W: Fetch current React docs
+    W->>C: Return latest best practices (hooks, etc.)
+    C->>G: Documentation response
+    G->>A: "Use hooks, avoid classes, latest patterns"
+    
+    Note over A: Agent generates code with current knowledge
+    A->>G: Request sandbox execution
+    G->>S: Route to sandbox server
+    S->>D: Create isolated container
+    D->>S: Container ready
+    S->>D: Execute React component code
+    D->>S: Execution results
+    S->>G: Code execution complete
+    G->>A: Execution results + output
+    A->>U: "Here's your modern React component!"
+    
+    Note over U,D: 🔒 Sandbox has NO network access<br/>📚 Context7 has network access<br/>🛡️ MCP Gateway secures everything
+```
+
+
+
+
 ## Real-World Applications
 
 This workshop demonstrates practical use cases for multi-agent systems:

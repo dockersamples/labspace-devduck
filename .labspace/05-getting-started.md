@@ -478,7 +478,4 @@ Excellent! You now have a fully functional multi-agent system running. In the ne
 
 Ready to explore the environment setup and deployment options? Let's continue! 🚀
 
----
 
-!!! success "Checkpoint Achieved"
-    You've successfully deployed your first multi-agent system with Docker! Take a moment to explore the interface and get familiar with the basic interaction patterns.

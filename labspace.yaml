@@ -12,7 +12,7 @@ sections:
   - title: Using MCP Gateway with Compose
     contentPath: .labspace/04-docker-mcp-gateway.md
   - title: Getting Started with DevDuck Multi-Agent System
-    contentPath: .labspace/05-getting-started.md
+    contentPath: .labspace/05-getting-started-with-devduck.md
   - title: Environment Setup
     contentPath: .labspace/06-environment-setup.md
   - title: Basic Agent Interaction

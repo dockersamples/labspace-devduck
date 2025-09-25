@@ -124,28 +124,6 @@ Each component runs in its own Docker container for isolation and scalability:
 | Cerebras Agent | Custom Python | 0.2-0.5 | 512 MB | Internal |
 | MCP Gateway | docker/mcp-gateway | 0.2-0.5 | 256 MB | Internal |
 
-### Network Architecture
-
-```mermaid
-graph LR
-    subgraph "Docker Network: devduck-network"
-        subgraph "External Access"
-            P[Port 8000<br/>Host → Container]
-        end
-        
-        subgraph "Internal Services"
-            DO[devduck-orchestrator:8000]
-            LA[local-agent:8001]
-            CA[cerebras-agent:8002] 
-            MCP[mcp-gateway:3000]
-        end
-    end
-    
-    P --> DO
-    DO --> LA
-    DO --> CA
-    DO --> MCP
-```
 
 ## Environment Configuration
 

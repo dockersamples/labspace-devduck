@@ -259,9 +259,6 @@ Perform a comprehensive health check:
 # Check container resource usage
 docker stats --no-stream
 
-# Test network connectivity
-docker compose exec devduck-agent curl -f http://localhost:8000/health
-
 # Verify agent endpoints
 curl -s http://localhost:8000/health | jq .
 ```

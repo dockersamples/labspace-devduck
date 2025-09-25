@@ -2,12 +2,6 @@
 
 Now that your system is properly deployed and configured, it's time to explore how the multi-agent system works in practice. You'll learn to interact with DevDuck and understand how it coordinates between different agents to provide intelligent responses.
 
-!!! info "Learning Objectives"
-    - Master the DevDuck web interface
-    - Understand agent routing and decision-making
-    - Practice basic multi-agent conversations
-    - Monitor agent communication patterns
-
 ## Understanding the Interface
 
 ### 🌐 Web Interface Overview
@@ -46,7 +40,7 @@ Look for these visual cues:
 
 Let's start with simple interactions to test the system:
 
-#### Exercise 1: Introduction
+### Exercise 1: Introduction
 
 **Try this conversation:**
 
@@ -59,13 +53,18 @@ You: Hello DevDuck! Can you introduce yourself?
 - It should mention its capabilities and available agents
 - The response might route to the Local Agent for a quick reply
 
-**Monitor the logs** while you do this:
-```bash
-# In a separate terminal, watch the logs
-docker compose logs -f devduck-agent
-```
+#### Observation
 
-#### Exercise 2: Agent Awareness
+Notice the tabs available - Trace, Events, State, Artifacts, Sessions, Eval - this gives developers comprehensive insight into agent behavior. 
+You can track not just what the agent did, but how long each step took, what state changes occurred, and what artifacts were created. 
+
+The Session ID at the top shows this is running in an isolated session, and the dropdown showing "devduck" indicates you can switch between different agent configurations.
+
+ This interface transforms AI agent development from a "black box" experience into transparent, debuggable system. Wonder "Why did the agent make that decision?" or "What's taking so long?", they can use this exact interface to trace through every step, measure performance bottlenecks, and understand the agent's reasoning process. This is what makes DevDuck not just a demo, but a serious development platform for building production AI agents.
+
+
+
+### Exercise 2: Agent Awareness
 
 **Ask about the agents:**
 
@@ -80,11 +79,20 @@ DevDuck should explain:
 - Its own role as orchestrator
 - How it decides which agent to use
 
+#### Observation
+
+- Notice how the devduck_agent is acting as the orchestrator - it can describe the other agents and route tasks appropriately.
+- This confirms the architecture where the Local Agent (Qwen model) makes routing decisions about when to delegate to the high-performance Cerebras Agent for complex tasks.
+- Tracing the Decision Process: The left panel shows this simple question took ~12.3 seconds to process, with most time spent in agent_run [devduck_agent] and the call_llm.
+- This demonstrates the intelligent routing logic - even answering "what agents are available" requires the main agent to think through the system architecture and provide contextual information about each agent's capabilities.
+-It's fascinating to see how they can trace every decision and understand exactly how the multi-agent system coordinates to provide responses.
+- This is the "agentic loop" with full transparency that makes DevDuck so powerful for development!Retry
+
 ### 🧠 Understanding Agent Routing
 
 DevDuck makes intelligent decisions about which agent should handle each request. Let's explore this:
 
-#### Exercise 3: Simple vs Complex Queries
+### Exercise 3: Simple vs Complex Queries
 
 **Simple Query (likely routed to Local Agent):**
 ```
@@ -106,29 +114,25 @@ def fibonacci(n):
 - Check which agent handles each request in the logs
 - Compare the depth and quality of responses
 
-### 📊 Monitoring Agent Communication
 
-Let's understand how agents communicate internally:
+**Controlling the agents**
 
-#### Real-time Monitoring Setup
+You: Cerebras, can you analyze this algorithm and suggest optimizations?
 
-```bash
-# Terminal 1: Agent logs
-docker compose logs -f devduck-agent
+**Observation Points:**
 
-# Terminal 2: Resource monitoring  
-watch docker stats
+- Try to see if explicit agent targeting changes the routing behavior!
+- By prefixing with "Cerebras," you overrode the automatic routing logic and forced the system to use the high-performance agent.
+- This is exactly what you need to understand - they can control which agent handles their requests.
 
-# Terminal 3: Network monitoring
-docker compose exec devduck-agent netstat -tuln
-```
 
-#### Exercise 4: Multi-step Request
+
+### Exercise 4: Multi-step Request
 
 **Send a request that requires multiple agents:**
 
 ```
-You: I'm building a Node.js application. Can you first explain what Express.js is, and then show me a complete example with error handling?
+You: Can you build a todo list app on AWS cloud
 ```
 
 **What to observe:**
@@ -136,6 +140,8 @@ You: I'm building a Node.js application. Can you first explain what Express.js i
 2. **Agent Routing**: Request may be split between agents
 3. **Response Assembly**: Final response combines multiple agent outputs
 4. **Resource Usage**: CPU and memory spikes during processing
+
+Response: For a more detailed guide, you can refer to the AWS documentation or consult with the Cerebras agent for assistance with code generation and execution in a sandboxed environment.
 
 ## Advanced Interaction Patterns
 

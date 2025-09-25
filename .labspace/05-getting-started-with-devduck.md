@@ -22,19 +22,19 @@ The system consists of three main agents orchestrated by Docker Compose, which p
 ### 🦆 DevDuck (Main Agent)
 
 - **Role**: Main development assistant and project coordinator
-- **Model**: Mistral (ai/mistral:7B-Q4_0)
+- **Model**: Mistral (`ai/mistral:7B-Q4_0`)
 - **Capabilities**: Routes requests to appropriate sub-agents based on user needs
 
 ### 👨‍💻 Local Agent Agent
 
 - **Role**: General development tasks and project coordination
-- **Model**:  llama3.2 (ai/llama3.2:1B-Q8_0)
+- **Model**:  llama3.2 (`ai/llama3.2:1B-Q8_0`)
 - **Specialization**: Node.js programming expert for understanding code, explaining concepts, and generating code snippets
 
 ### 🧠 Cerebras Agent
 
 - **Role**: Advanced computational tasks and complex problem-solving
-- **Model**: Llama-4 Scout (llama-4-scout-17b-16e-instruct)
+- **Model**: Llama-4 Scout (`llama-4-scout-17b-16e-instruct`)
 - **Provider**: Cerebras API
 - **Specialization**: Node.js programming expert for complex problem-solving scenarios
 
@@ -55,41 +55,6 @@ cd docker-cerebras-demo
 ls -la
 ```
 
-
-## System Architecture Overview
-
-Let's explore the multi-agent system architecture you'll be building:
-
-### High-Level Architecture
-
-```mermaid
-graph TB
-    subgraph "Client Layer"
-        UI[Web Interface<br/>FastAPI Frontend]
-    end
-    
-    subgraph "Orchestration Layer" 
-        DO[DevDuck Orchestrator<br/>Main Agent Coordinator]
-        MCP[MCP Gateway<br/>Model Context Protocol]
-    end
-    
-    subgraph "Agent Layer"
-        LA[Local Agent<br/>Quick Processing]
-        CA[Cerebras Agent<br/>Cloud AI]
-    end
-    
-    subgraph "Model Layer"
-        LM[Local Models<br/>Cached Locally]
-        CM[Cerebras Cloud<br/>Remote API]
-    end
-    
-    UI --> DO
-    DO --> LA
-    DO --> CA
-    DO <--> MCP
-    LA --> LM
-    CA --> CM
-```
 
 ### Component Breakdown
 
@@ -145,25 +110,6 @@ graph TB
 4. **Processing**: Selected agent(s) process the request
 5. **Response**: DevDuck aggregates and returns unified response
 
-#### 🔄 **Inter-Agent Communication**
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant DO as DevDuck Orchestrator
-    participant LA as Local Agent
-    participant CA as Cerebras Agent
-    
-    U->>DO: "Explain this complex algorithm"
-    DO->>DO: Analyze request complexity
-    DO->>CA: Route to Cerebras Agent
-    CA->>CA: Process with advanced AI
-    CA->>DO: Return detailed explanation
-    DO->>LA: "Generate code example"
-    LA->>LA: Create simple example
-    LA->>DO: Return code snippet
-    DO->>U: Combined response with explanation + code
-```
 
 ### Container Architecture
 

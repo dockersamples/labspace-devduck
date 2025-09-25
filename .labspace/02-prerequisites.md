@@ -39,11 +39,6 @@ docker system info
 
 Open Docker Desktop Settings > AI > “Docker Model Runner” is enabled.
 
-Alternatively, you can use CLI:
-
-```bash
-docker desktop enable model-runner
-```
 
 #### Download AI models
 

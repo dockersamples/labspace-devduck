@@ -302,21 +302,6 @@ Run through this validation checklist:
 - [ ] DevDuck orchestrator responds appropriately
 - [ ] No error messages in container logs
 
-#### Agent Communication
-```bash
-# Test direct agent communication (advanced)
-docker compose exec devduck-agent python -c "
-import requests
-response = requests.get('http://localhost:8000/health')
-print(f'Status: {response.status_code}')
-print(f'Response: {response.json()}')
-"
-```
-
-#### Resource Health
-- [ ] System resources are stable (not maxed out)
-- [ ] All containers remain running
-- [ ] Network connectivity is working
 
 
 

@@ -12,12 +12,42 @@ In this workshop, you'll build a system called "DevDuck" - a developer assistanc
 ```mermaid
 graph TD
     A[User Interface] --> B[DevDuck Orchestrator]
+    
+    %% Agent layer
     B --> C[Local Agent]
-    B --> D[Cerebras Agent]
+    B --> D[Cerebras Agent] 
+    B --> G[MCP Gateway]
+    
+    %% Model connections
     C --> E[Local Models]
     D --> F[Cerebras Cloud API]
-    B --> G[MCP Gateway]
+    
+    %% Bidirectional agent-MCP connections
+    C <--> G
+    D <--> G
+    
+    %% MCP Gateway to servers
+    G --> H[Context7 MCP Server<br/>📚 Documentation Access]
+    G --> I[Node Sandbox MCP Server<br/>🔧 Code Execution]
+    
+    %% Context7 external connections
+    H --> J[Framework Documentation<br/>React, Vue, Angular, etc.]
+    H --> K[API Documentation<br/>REST, GraphQL specs]
+    H --> L[Library Documentation<br/>npm, PyPI packages]
+    
+    %% Sandbox connections
+    I --> M[Isolated Docker Containers]
+    
+    %% Styling
+    classDef mcp fill:#34495e,stroke:#2c3e50,color:#fff
+    classDef docs fill:#3498db,stroke:#2980b9,color:#fff
+    classDef containers fill:#95a5a6,stroke:#7f8c8d,color:#fff
+    
+    class G,H,I mcp
+    class J,K,L docs
+    class M containers
 ```
+
 
 
 ### Agent Roles
@@ -26,6 +56,22 @@ graph TD
 2. **Local Agent**: Handles quick processing tasks using local models
 3. **Cerebras Agent**: Leverages powerful cloud-based AI for complex analysis
 4. **MCP Gateway**: Manages Model Context Protocol for enhanced capabilities
+
+### How it works?
+
+- This application shows how secure AI coding agents are orchestrated through a multi-layered system.
+- At the top, user requests flow through the User Interface into the DevDuck Orchestrator, which serves as the central decision-making hub.
+- The orchestrator manages three critical pathways:
+    - routing to a Local Agent (powered by local Qwen models for quick decisions),
+    - delegating complex tasks to the Cerebras Agent (utilizing high-performance cloud APIs), and
+    - coordinating tool access through the MCP Gateway.
+
+- The bidirectional arrows between agents and the MCP Gateway show that this isn't just a simple pipeline - agents actively communicate with each other for routing decisions and continuously interact with tools to enhance their capabilities.
+- The MCP Gateway acts as a secure intermediary that manages two specialized MCP servers, each serving distinct purposes.
+- The Context7 MCP Server handles documentation retrieval, connecting to external sources like framework documentation (React, Vue, Angular), API specifications (REST, GraphQL), and library documentation (npm, PyPI packages). This ensures agents have access to current, authoritative information when generating code.
+- Meanwhile, the Node Sandbox MCP Server manages secure code execution by creating Isolated Docker Containers with disabled networking, providing a safe environment where generated code can run without security risks.
+
+The architecture's brilliance lies in its security-by-design approach: while Context7 can access the internet to fetch documentation, the sandbox containers are completely network-isolated, preventing any potential data exfiltration or malicious activity from generated code. This creates a perfect balance where AI agents can access up-to-date knowledge to write better code, while ensuring that code execution happens in a bulletproof secure environment - essentially giving you the benefits of current documentation and safe execution simultaneously.
 
 
 ## Real-World Applications

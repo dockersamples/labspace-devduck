@@ -58,7 +58,7 @@ Alternatively, you can use CLI:
 docker desktop enable model-runner
 ```
 
-#### Download a model
+#### Download AI models
 
 ```
 docker model pull ai/llama3.2:1B-Q8_0

@@ -13,8 +13,7 @@ Before diving into the hands-on exercises, let's ensure your environment is prop
  | **CPU** | 4 cores | 8+ cores |
  | **Network** | Stable internet | High-speed broadband |
 
- !!! warning "Resource Usage"
-    AI models can be memory-intensive. The local agent will download and cache models, which requires significant disk space and RAM.
+
 
 ### Software Prerequisites
 
@@ -27,9 +26,8 @@ Before diving into the hands-on exercises, let's ensure your environment is prop
 
 2. **Git** (for cloning repositories)
 
-3. **Text Editor/IDE** (VS Code, PyCharm, or similar)
+3. **Web Browser** (Chrome, Firefox, Safari, Edge)
 
-4. **Web Browser** (Chrome, Firefox, Safari, Edge)
 
 #### 🔧 Verification Commands
 

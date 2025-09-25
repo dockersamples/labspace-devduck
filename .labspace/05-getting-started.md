@@ -1,6 +1,43 @@
-# Getting Started with DevDuck Multi-Agent Application
+# Getting Started with DevDuck Agents
 
-Now that you've understood how Docker Model Runner and MCP Gateway works, let's try building DevDuck Multi-Agent application! This section will guide you through the complete setup process, from cloning the repository to accessing your first multi-agent system.
+Now that you've understood how Docker Model Runner and MCP Gateway works, let's try building DevDuck Multi-Agent application! This section will guide you through the complete setup process, from cloning the repository to accessing your first multi-agent system
+
+DevDuck is a multi-agent system for Node.js programming assistance built with Google Agent Development Kit (ADK). This project features a coordinating agent (DevDuck) that manages two specialized sub-agents (Local Agent and Cerebras) for different programming tasks.
+
+## Architecture
+
+The system consists of three main agents orchestrated by Docker Compose, which plays a
+**primordial role** in launching and coordinating all agent services:
+
+### 🐙 Docker Compose Orchestration
+
+- **Central Role**: Docker Compose serves as the foundation for the entire multi-agent system
+- **Service Orchestration**: Manages the lifecycle of all three agents (DevDuck, Local Agent, and Cerebras)
+- **Configuration Management**: Defines agent prompts, model configurations, and service dependencies
+  directly in the compose file
+- **Network Coordination**: Establishes secure inter-agent communication channels
+- **Environment Management**: Handles API keys, model parameters, and runtime configurations
+
+### Agent Components
+
+### 🦆 DevDuck (Main Agent)
+
+- **Role**: Main development assistant and project coordinator
+- **Model**: Mistral (ai/mistral:7B-Q4_0)
+- **Capabilities**: Routes requests to appropriate sub-agents based on user needs
+
+### 👨‍💻 Local Agent Agent
+
+- **Role**: General development tasks and project coordination
+- **Model**:  llama3.2 (ai/llama3.2:1B-Q8_0)
+- **Specialization**: Node.js programming expert for understanding code, explaining concepts, and generating code snippets
+
+### 🧠 Cerebras Agent
+
+- **Role**: Advanced computational tasks and complex problem-solving
+- **Model**: Llama-4 Scout (llama-4-scout-17b-16e-instruct)
+- **Provider**: Cerebras API
+- **Specialization**: Node.js programming expert for complex problem-solving scenarios
 
 ## Step 1: Repository Setup
 
@@ -173,9 +210,9 @@ You'll need to configure these environment variables:
 
 ```bash
 # Cerebras Configuration
-CEREBRAS_API_KEY=your_api_key_here
+CEREBRAS_API_KEY=<your_cerebras_api_key>
 CEREBRAS_BASE_URL=https://api.cerebras.ai/v1
-CEREBRAS_CHAT_MODEL=llama3.1-70b
+CEREBRAS_CHAT_MODEL=llama-4-scout-17b-16e-instruct
 
 # Local Agent Configuration  
 LOCAL_MODEL_NAME=microsoft/DialoGPT-medium
@@ -206,36 +243,6 @@ services:
     command: /docker-mcp gateway serve mcp-gateway-catalog.yaml
 ```
 
-
-
-### 📁 Explore the Repository Structure
-
-Take a moment to understand the project layout:
-
-
-```
-.
-├── LICENSE.md                 # Project license
-├── README.md                  # Project documentation
-├── agents/                    # Agent implementation directory
-│   ├── Dockerfile            # Container image definition
-│   ├── devduck/              # Main DevDuck orchestrator
-│   │   ├── __init__.py
-│   │   ├── agent.py          # Core orchestrator logic
-│   │   └── sub_agents/       # Individual agent implementations
-│   │       ├── cerebras/     # Cerebras AI agent
-│   │       │   ├── agent.py
-│   │       │   └── tools.py
-│   │       └── localagent/   # Local processing agent
-│   │           └── agent.py
-│   ├── main.py               # FastAPI application entry point
-│   └── requirements.txt      # Python dependencies
-├── compose.yml               # Docker Compose configuration
-├── mcp-gateway-catalog.yaml  # MCP Gateway configuration
-├── pyproject.toml           # Python project metadata
-└── uv.lock                  # Dependency lock file
-```
-
 ### 🔍 Examine Key Files
 
 Let's look at the main configuration files:
@@ -251,53 +258,8 @@ cat agents/main.py
 cat agents/requirements.txt
 ```
 
-## Step 2: Environment Configuration
 
-### Create Environment File
-
-Set up your environment variables:
-
-```bash
-# Copy the environment template (if available)
-cp .env.sample .env 2>/dev/null || touch .env
-
-# Edit the environment file
-nano .env  # or use your preferred editor
-```
-
-### 🔐 Configure Required Variables
-
-Add the following configuration to your `.env` file:
-
-```bash
-# Cerebras API Configuration
-CEREBRAS_API_KEY=your_actual_api_key_here
-CEREBRAS_BASE_URL=https://api.cerebras.ai/v1
-CEREBRAS_CHAT_MODEL=llama3.1-70b
-
-# Local Agent Configuration
-LOCAL_MODEL_NAME=microsoft/DialoGPT-medium
-LOCAL_MODEL_CACHE_DIR=/tmp/models
-
-# Application Configuration
-DEBUG=false
-LOG_LEVEL=INFO
-HOST=0.0.0.0
-PORT=8000
-```
-
-
-### Validate Environment Setup
-
-```bash
-# Check if your .env file is properly formatted
-cat .env | grep -E '^[A-Z_]+='
-
-# Verify no sensitive information is accidentally committed
-echo ".env" >> .gitignore
-```
-
-## Step 3: Docker Image Preparation
+## Docker Image Preparation
 
 Before deploying, let's understand what Docker will build:
 
@@ -314,22 +276,8 @@ cat agents/Dockerfile
 - Application code copying
 - Container startup configuration
 
-### Pre-build Check
 
-Ensure Docker is ready:
-
-```bash
-# Verify Docker daemon is running
-docker info
-
-# Check available system resources
-docker system df
-
-# Clean up any unused resources (optional)
-docker system prune -f
-```
-
-## Step 4: System Deployment
+## Step 2. System Deployment
 
 Now let's deploy the complete multi-agent system:
 
@@ -372,22 +320,7 @@ docker compose up --build
 docker compose up --build --force-recreate
 ```
 
-### Monitor the Deployment
-
-Open a new terminal to monitor the deployment:
-
-```bash
-# Watch container status in real-time
-watch docker compose ps
-
-# View logs from all services
-docker compose logs -f
-
-# View logs from specific service
-docker compose logs -f devduck-agent
-```
-
-## Step 5: Deployment Verification
+## Step 3: Deployment Verification
 
 ### ✅ Check Service Status
 
@@ -418,17 +351,9 @@ docker compose exec devduck-agent curl -f http://localhost:8000/health
 curl -s http://localhost:8000/health | jq .
 ```
 
-### 📊 System Resource Monitoring
 
-```bash
-# Monitor system resources
-docker system df
 
-# Check memory usage
-docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}"
-```
-
-## Step 6: First Access
+## Step 4: First Access
 
 ### 🌐 Access the Web Interface
 
@@ -454,7 +379,7 @@ Test the system with a simple interaction:
 docker compose logs -f devduck-agent
 ```
 
-## Step 7: System Validation
+## Step 5: System Validation
 
 ### 🔍 Comprehensive Testing
 

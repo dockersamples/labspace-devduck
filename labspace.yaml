@@ -9,7 +9,7 @@ sections:
     contentPath: .labspace/02-prerequisites.md
   - title: Using Model Runner with Compose
     contentPath: .labspace/03-docker-dmr-compose.md
-  - title: Using Docker MCP Gateway with Docker Compose
+  - title: Using MCP Gateway with Compose
     contentPath: .labspace/04-docker-mcp-gateway.md
   - title: Getting Started
     contentPath: .labspace/05-getting-started.md

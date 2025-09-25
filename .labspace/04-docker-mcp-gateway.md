@@ -5,7 +5,7 @@ The Docker MCP Gateway is a CLI tool and gateway service that implements the Mod
 
 
 ```mermaid
- graph TB
+graph TB
     subgraph "AI Clients"
         A1[Claude Desktop]
         A2[VS Code]

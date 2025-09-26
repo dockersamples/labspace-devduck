@@ -1,6 +1,6 @@
 # Labspace - DevDuck Multi-Agent Systems
 
-This Labspace provides an overview of the [DevDuck Multi-Agent System](https://github.com/dockersamples/docker-cerebras-demo), a secure coding agent for Node.js programming assistance built with Google Agent Development Kit (ADK). The system features a coordinating agent (DevDuck) that manages two specialized sub-agents (Local Agent and Cerebras) for different programming tasks.
+This Labspace provides an overview of the [DevDuck Multi-Agent System](https://github.com/dockersamples/docker-cerebras-demo), a secure AI coding agent for Node.js programming assistance built with Google Agent Development Kit (ADK). The system features a coordinating agent (DevDuck) that manages two specialized sub-agents (Local Agent and Cerebras) for different programming tasks.
 
 ## Learning objectives
 

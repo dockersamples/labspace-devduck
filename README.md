@@ -32,4 +32,4 @@ And then open your browser to http://localhost:3030.
 
 ### Using the Docker Desktop extension
 
-If you have the Labspace extension installed (`docker extension install dockersamples/labspace-extension` if not), you can also [click this link](https://open.docker.com/dashboard/extension-tab?extensionId=dockersamples/labspace-extension&location=dockersamples/labspace-mcp-gateway&title=Docker%20MCP%20Gateway) to launch the Labspace.
+If you have the Labspace extension installed (`docker extension install dockersamples/labspace-extension` if not), you can [click this link](https://open.docker.com/dashboard/extension-tab?extensionId=dockersamples/labspace-extension&location=dockersamples/labspace-mcp-gateway&title=Docker%20MCP%20Gateway) to launch the Labspace.
